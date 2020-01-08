@@ -1,1 +1,45 @@
 {% extends "base.html" %}
+{% block content %}
+<div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> Getting Started</h1>
+                </div>
+                <div class="doc-body row">
+                    <div class="doc-content col-md-9 col-12 order-1">
+                        <div class="content-inner">
+                            <section id="url-section" class="url-section">
+                                <h2 class="section-title">Adding your web page to the permaweb</h2>
+                                <div class="section-block">
+                                    <p>First off, you'll need to get the full web address of the web page you want and pop it in the URL field below.</p>
+                                    <p>Next up you can review the option available for storing the pages content and finally generate your new permanent page archive!</p>
+                                </div>
+                            </section>
+                            <section id="options-section" class="doc-section">
+                                <form method="post" action="{% url %}">
+                                    <fieldset>
+                                        <input type="text" class="form-control" placeholder="Enter URL">
+                                    </fieldset>
+                                    <br/>
+                                    <button class="btn btn-cta btn-orange">Fetch Page Content for Review</button>
+                                </form>
+                            </section>
+                            <section id="publish-section" class="doc-section">
+
+                            </section>
+
+
+                        </div>
+                    </div>
+                    <div class="doc-sidebar col-md-3 col-12 order-0 d-none d-md-flex">
+                        <div id="doc-nav" class="doc-nav">
+
+	                            <nav id="doc-menu" class="nav doc-menu flex-column sticky">
+	                                <a class="nav-link scrollto active" href="#url-section">Enter URL</a>
+	                                <a class="nav-link scrollto" href="#options-section">Select Options</a>
+                                    <a class="nav-link scrollto" href="#publish-section">Publish Your Page</a>
+                                    <a class="nav-link scrollto" href="#publish-details-section">Permaweb Details</a>
+	                            </nav>
+
+                        </div>
+                    </div>
+                </div>
+{% endblock %}
