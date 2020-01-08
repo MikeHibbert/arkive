@@ -14,9 +14,10 @@
                                 </div>
                             </section>
                             <section id="options-section" class="doc-section">
-                                <form method="post" action="{% url %}">
+                                <form method="post" action="{% url 'get_content' %}">
+                                    {% csrf_token %}
                                     <fieldset>
-                                        <input type="text" class="form-control" placeholder="Enter URL">
+                                        <input type="text" id="id_url" name="url" class="form-control" placeholder="Enter URL">
                                     </fieldset>
                                     <br/>
                                     <button class="btn btn-cta btn-orange">Fetch Page Content for Review</button>

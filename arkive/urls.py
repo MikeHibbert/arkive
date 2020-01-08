@@ -15,10 +15,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from arkiver.views import home, process_page
+from arkiver.views import home, get_content
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='index'),
-    path('/process-page', process_page, name='process_page'),
+    path('get-content', get_content, name='get_content'),
 ]
