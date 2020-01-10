@@ -1455,3 +1455,11 @@ select {
     width: 560px;
   }
 }
+
+.outoffocus {
+    color: #c0c0c0;
+}
+
+input[disabled] {
+    color: #c0c0c0;
+}

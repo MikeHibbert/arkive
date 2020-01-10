@@ -7,14 +7,14 @@
                 <div class="doc-body row">
                     <div class="doc-content col-md-9 col-12 order-1">
                         <div class="content-inner">
-                            <section id="url-section" class="url-section">
+                            <section class="url-section outoffocus">
                                 <h2 class="section-title">Adding your web page to the permaweb</h2>
                                 <div class="section-block">
                                     <p>First off, you'll need to get the full web address of the web page you want and pop it in the URL field below.</p>
                                     <p>Next up you can review the option available for storing the pages content and finally generate your new permanent page archive!</p>
                                 </div>
                             </section>
-                            <section id="options-section" class="doc-section">
+                            <section id="url-section" class="doc-section outoffocus">
                                 <form method="post" action="{% url 'get_content' %}">
                                     {{form.errors}}
                                     {% csrf_token %}
@@ -25,12 +25,34 @@
                                     <button class="btn btn-cta btn-orange">Fetch Page Content for Review</button>
                                 </form>
                             </section>
-                            <section id="publish-section" class="doc-section">
-                                <p>{{article.text}}</p>
-                                <p>{{article.authors}}</p>
-                                <p>{{article.top_image}}</p>
-                                <p>{{article.keywords}}</p>
-                                <p>{{article.summary}}</p>
+                            <hr/>
+                            <section id="options-section" class="doc-section">
+                                <form method="post" action="{% url 'set_options' %}">
+                                    <h2>{{newspaper.title}}</h2>
+                                    <br>
+                                    <p>
+                                        <img src="{{newspaper.top_image}}" width="100%"/>
+                                        <label>Top Image</label>
+                                    </p>
+                                    <h3>Article</h3>
+                                    <input type="hidden" name="newspaper_text" value="{{newspaper.text}}" >
+                                    <p>
+                                        {{newspaper.text|truncatechars:600}}
+                                    </p>
+                                    {% if newpaper.authors.length > 0 %}
+                                        <h3>Authors</h3>
+                                        <p>{{newspaper.authors}}</p>
+                                    {% endif %}
+
+                                    <label for="tags">Keywords</label>
+                                    <input name="tags" type="hidden" autocomplete="off" value="{{newspaper.keywords|to_comma_separated_string}}">
+                                    <br>
+                                    <h3>Summary</h3>
+                                    <p>{{newspaper.summary}}</p>
+                                    <hr>
+                                    <h3>Options</h3>
+
+                                </form>
                             </section>
 
 
@@ -40,7 +62,7 @@
                         <div id="doc-nav" class="doc-nav">
 
 	                            <nav id="doc-menu" class="nav doc-menu flex-column sticky">
-	                                <a class="nav-link scrollto" href="#url-section">Enter URL</a>
+	                                <a class="nav-link scrollto" href="/">Enter URL</a>
 	                                <a class="nav-link scrollto active" href="#options-section">Select Options</a>
                                     <a class="nav-link scrollto" href="#publish-section">Publish Your Page</a>
                                     <a class="nav-link scrollto" href="#publish-details-section">Permaweb Details</a>
@@ -49,4 +71,18 @@
                         </div>
                     </div>
                 </div>
+{% endblock %}
+
+{% block js_extra %}
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $('[name=tags]')
+            .tagify()
+            .on('add', function(e, tagName){
+                console.log('added', tagName)
+            });
+
+            $('body').scrollTo($('#options-section'), 800);
+        });
+    </script>
 {% endblock %}

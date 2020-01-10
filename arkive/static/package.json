@@ -9,7 +9,7 @@
   "author": "Mike Hibbert",
   "license": "GPL-3.0-or-later",
   "dependencies": {
-    "toastr": "^2.1.4",
-    "typeahead": "^0.2.2"
+    "@yaireo/tagify": "^3.2.6",
+    "toastr": "^2.1.4"
   }
 }

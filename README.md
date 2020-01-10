@@ -3,7 +3,7 @@
 ## Introduction
 
 ## Installation
-To install ARkive you will need to have docker and docker compose installed (https://docs.docker.com/compose/install/)
+To install ARkive you will need to have docker and docker-compose installed (https://docs.docker.com/compose/install/)
 
 To build your own image:
 
