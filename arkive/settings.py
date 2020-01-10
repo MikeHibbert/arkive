@@ -140,3 +140,8 @@ MESSAGE_TAGS = {message_constants.DEBUG: 'debug',
             message_constants.SUCCESS: 'success',
             message_constants.WARNING: 'warning',
             message_constants.ERROR: 'error',}
+
+try:
+    from .local_settings import *
+except ImportError:
+    print("local_settings.py not found")
