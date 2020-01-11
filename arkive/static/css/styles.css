@@ -1463,3 +1463,7 @@ select {
 input[disabled] {
     color: #c0c0c0;
 }
+
+.hidden {
+    display: none;
+}

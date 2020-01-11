@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
-from .forms import URLForm
-from .helpers import get_newspaper
+from .forms import URLForm, PublishOptionsForm
+from .helpers import get_newspaper, create_archive_page, create_readable_page
 
 
 def home(request):
@@ -30,3 +30,18 @@ def set_options(request):
             messages.error(request, "URL not valid")
 
     return render(request, 'processed-page.html', locals())
+
+
+def publish_page(request):
+    if request.method == "POST":
+        form = PublishOptionsForm(request.POST)
+        if form.is_valid():
+            publish_as = form.cleaned_data['publish_as']
+            url = form.cleaned_data['url']
+
+            if publish_as == 'readable':
+                save_file = create_readable_page(url)
+            if publish_as == 'archive':
+                save_file = create_archive_page(url)
+
+    return render(request, 'published-page.html', locals())

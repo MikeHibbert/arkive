@@ -15,11 +15,13 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from arkiver.views import home, get_content, set_options
+from arkiver.views import home, get_content, set_options, publish_page
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', home, name='index'),
     path('get-content', get_content, name='get_content'),
-    path('set-options', set_options, name='set_options')
+    path('set-options', set_options, name='set_options'),
+    path('publish-page', publish_page, name='publish_page'),
+
 ]

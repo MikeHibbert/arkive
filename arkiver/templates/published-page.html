@@ -26,15 +26,13 @@
                                 </form>
                             </section>
                             <hr/>
-                            <section id="options-section" class="doc-section">
+                            <section id="options-section" class="doc-section outoffocus">
 
-                                <form method="post" action="{% url 'set_options' %}">
-                                    <label><strong>How would you like to store this page's content?</strong></label>
-                                    <select id="publish_as" name="publish_as" class="form-control">
-                                        <option value="readable">Create readable version</option>
-                                        <option value="archive">Archive this page on the Arweave</option>
-                                    </select>
+                                <form>
+                                    <label><strong>Publishing option</strong></label>
+                                    {{form.publish_as|addcss:'form-control'}}
                                     <br>
+                                    {% if publish_as == 'readable' %}
                                     <div id="readable">
                                         <p>Your page's content, images, css and javascript will be extracted from this page and made into a new readable version of the page and then uploaded to the Arweave where it will be permanently viewable.</p>
                                         <h2>{{newspaper.title}}</h2>
@@ -59,9 +57,12 @@
                                         <h3>Summary</h3>
                                         <p>{{newspaper.summary}}</p>
                                     </div>
+                                    {% endif %}
+                                    {% if publish_as == 'archive' %}
                                     <div id="archive">
                                         <p>Your page's content, images, css and javascript will be compiled and uploaded to the Arweave where it will be permanently viewable.</p>
                                     </div>
+                                    {% endif %}
                                     <br/>
                                     <button class="btn btn-cta btn-success">Publish this Page</button>
                                 </form>

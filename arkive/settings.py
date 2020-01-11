@@ -142,5 +142,5 @@ MESSAGE_TAGS = {message_constants.DEBUG: 'debug',
 
 try:
     from .local_settings import *
-except ImportError:
-    print("local_settings.py not found")
+except ImportError as ie:
+    print("local_settings.py not found {}".format(ie))
