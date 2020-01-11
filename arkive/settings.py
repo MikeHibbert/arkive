@@ -26,9 +26,8 @@ SECRET_KEY = '!=qkujsrbtsyk51oy0e3qnf5$37$il9i&m0ux!pz_-$(a4f!7h'
 DEBUG = int(os.getenv("DEBUG", default=0))
 
 ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS")
-print(ALLOWED_HOSTS)
 
-if len(ALLOWED_HOSTS) > 0:
+if ALLOWED_HOSTS is not None and len(ALLOWED_HOSTS) > 0:
     ALLOWED_HOSTS = ALLOWED_HOSTS.split(" ")
 
 # Application definition
