@@ -64,11 +64,15 @@
                     </h1>
                     <p>Your pages forever</p>
                 </div>
-                <div class="pull-right">
+                <div class="pull-right" style="width: 430px">
                     <h3>Donate</h3>
                     <p>
-                        AR to keep ARKive doing what it does best!<br>
-                        AR Address: <strong>OFD5dO06Wdurb4w5TTenzkw1PacATOP-6lAlfAuRZFk</strong>
+                        To keep ARKive doing what it does best you can send a donation of AR to this address:<br><br>
+                        <input
+                                        value="OFD5dO06Wdurb4w5TTenzkw1PacATOP-6lAlfAuRZFk"
+                                        id="ar-address"
+                                        style="background: #494d55; color: rgba(255, 255, 255, 0.85); border: none; font-weight: bold"
+                    > <span id='copy-address-icon' style='cursor: pointer' aria-hidden="true" class="icon_documents_alt icon"></span>
                     </p>
                     <p></p>
                 </div>
@@ -101,6 +105,20 @@
         $('.outoffocus input').attr('disabled', 'disabled');
         $('.outoffocus button').attr('disabled', 'disabled');
         $('.outoffocus select').attr('disabled', 'disabled');
+        $('#ar-address').attr('size', $('#ar-address').val().length);
+
+        $('#copy-address-icon').click(function(event) {
+            var address = document.getElementById("ar-address");
+
+            address.select();
+            address.setSelectionRange(0, 99999);
+
+            document.execCommand('copy');
+
+            document.getSelection().removeAllRanges();
+
+            toastr.success('AR address has been copied');
+        });
     </script>
 
     {% block js_extra %}{% endblock %}
