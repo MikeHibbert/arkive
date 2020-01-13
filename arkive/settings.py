@@ -148,3 +148,4 @@ try:
     from .local_settings import *
 except ImportError as ie:
     print("local_settings.py not found {}".format(ie))
+    pass

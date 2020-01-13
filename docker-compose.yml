@@ -1,12 +1,12 @@
 version: '3'
 
 services:
-  web:
+  arkive:
     build: .
     command: gunicorn arkive.wsgi:application --bind 0.0.0.0:8000
     volumes:
       - .:/code
-      - static_volume:/code/arkive/static
+      - static_volume:/code/arkive/staticfiles
       - media_volume:/code/arkive/media
     networks:
       - nginx_network
@@ -18,10 +18,10 @@ services:
       - 80:80
     volumes:
       - ./config/nginx/conf.d:/etc/nginx/conf.d
-      - static_volume:/code/arkive/static
+      - static_volume:/code/arkive/staticfiles
       - media_volume:/code/arkive/media
     depends_on:
-      - web
+      - arkive
     networks:
       - nginx_network
     restart: always

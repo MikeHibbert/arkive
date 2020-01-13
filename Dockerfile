@@ -3,9 +3,10 @@ ENV PYTHONUNBUFFERED 1
 ENV DEBUG 0
 ENV DJANGO_ALLOWED_HOSTS ".arkive.online"
 RUN mkdir /code
-WORKDIR /code
 COPY requirements.txt /code/
-RUN pip install -r requirements.txt
+RUN pip install -r /code/requirements.txt
 COPY . /code/
+RUN rm /code/arkive/local_settings.py
 RUN python -c "import nltk; nltk.download('punkt')"
-RUN python /code/manage.py collectstatic --noinput
+WORKDIR /code
+RUN python manage.py collectstatic --noinput

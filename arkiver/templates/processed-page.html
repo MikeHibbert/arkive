@@ -91,12 +91,6 @@
 {% block js_extra %}
     <script type="text/javascript">
         $(document).ready(function() {
-            $('[name=tags]')
-            .tagify()
-            .on('add', function(e, tagName){
-                console.log('added', tagName)
-            });
-
             $('body').scrollTo($('#options-section'), 800);
 
             $('#publish_as').change(function(event) {
