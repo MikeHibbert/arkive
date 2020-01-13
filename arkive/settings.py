@@ -135,10 +135,14 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'arkive', 'media')
 
 from django.contrib.messages import constants as message_constants
 MESSAGE_TAGS = {message_constants.DEBUG: 'debug',
-            message_constants.INFO: 'info',
-            message_constants.SUCCESS: 'success',
-            message_constants.WARNING: 'warning',
-            message_constants.ERROR: 'error',}
+                message_constants.INFO: 'info',
+                message_constants.SUCCESS: 'success',
+                message_constants.WARNING: 'warning',
+                message_constants.ERROR: 'error',}
+
+BROKER_URL = 'redis://redis/0'
+CELERY_RESULT_BACKEND = 'redis://redis/0'
+CELERY_ALWAYS_EAGER = True
 
 try:
     from .local_settings import *

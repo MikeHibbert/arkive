@@ -1,9 +1,12 @@
+amqp==2.5.2
 arrow==0.15.5
 asgiref==3.2.3
 attrs==19.3.0
 backcall==0.1.0
 beautifulsoup4==4.8.2
+billiard==3.6.1.0
 bleach==3.1.0
+celery==4.4.0
 certifi==2019.11.28
 chardet==3.0.4
 cssselect==1.1.0
@@ -15,7 +18,7 @@ feedfinder2==0.0.4
 feedparser==5.2.1
 gunicorn==20.0.4
 html5lib==1.0.1
--e git+https://github.com/MikeHibbert/htmlark.git#egg=htmlark
+-e git+https://github.com/MikeHibbert/htmlark.git@83ce0f41e1b5e3a72b9381cf06519a1153c030f2#egg=HTMLArk
 idna==2.8
 importlib-metadata==1.3.0
 ipykernel==5.1.3
@@ -30,6 +33,7 @@ jupyter==1.0.0
 jupyter-client==5.3.4
 jupyter-console==6.0.0
 jupyter-core==4.6.1
+kombu==4.6.7
 lxml==4.4.2
 MarkupSafe==1.1.1
 mistune==0.8.4
@@ -69,6 +73,7 @@ tldextract==2.2.2
 tornado==6.0.3
 traitlets==4.3.3
 urllib3==1.25.7
+vine==1.3.0
 wcwidth==0.1.8
 webencodings==0.5.1
 widgetsnbextension==3.5.1

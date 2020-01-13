@@ -10,6 +10,7 @@ services:
       - media_volume:/code/arkive/media
     networks:
       - nginx_network
+    restart: always
 
   nginx:
     image: nginx:1.13
@@ -23,6 +24,14 @@ services:
       - web
     networks:
       - nginx_network
+    restart: always
+
+  redis:
+    image: redis:latest
+    hostname: redis
+    restart: always
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
 
 networks:
   nginx_network:
