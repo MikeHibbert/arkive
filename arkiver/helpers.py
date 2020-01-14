@@ -2,17 +2,45 @@ import os
 import arrow
 import htmlark
 import bs4
+import logging
 from arweave import Transaction, Wallet
 from newspaper import Article, ArticleException
 from opengraph_tags import add_og_tags_to_page_at
 from django.conf import settings
 
-def upload_file_to_arweave(filepath):
+logger = logging.getLogger(__name__)
+
+
+def upload_file_to_arweave(filepath, url, tags=[]):
     wallet_path = os.path.join(settings.BASE_DIR, 'wallet', 'wallet.pem')
     wallet = Wallet(wallet_path)
 
-    with open(filepath, 'r') as file_to_upload:
-        data = file_to_upload.read()
+    tx_id = None
+
+    try:
+        with open(filepath, 'r') as file_to_upload:
+            data = file_to_upload.read()
+
+            tx = Transaction(wallet, data=data.encode())
+
+            tx.add_tag("app", "Arkive")
+            tx.add_tag('created', str(arrow.now().timestamp))
+            tx.add_tag('url', url)
+
+            for name, value in tags.iteritems():
+                tx.add_tag(name, value)
+
+            tx.sign(wallet)
+
+            tx.post()
+
+            tx_id = tx.id.decode()
+
+    except Exception as e:
+        logger.debug(e)
+
+    return tx_id
+
 
 
 
