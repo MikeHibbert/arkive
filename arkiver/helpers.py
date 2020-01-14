@@ -2,9 +2,19 @@ import os
 import arrow
 import htmlark
 import bs4
+from arweave import Transaction, Wallet
 from newspaper import Article, ArticleException
 from opengraph_tags import add_og_tags_to_page_at
 from django.conf import settings
+
+def upload_file_to_arweave(filepath):
+    wallet_path = os.path.join(settings.BASE_DIR, 'wallet', 'wallet.pem')
+    wallet = Wallet(wallet_path)
+
+    with open(filepath, 'r') as file_to_upload:
+        data = file_to_upload.read()
+
+
 
 
 def get_newspaper(url):

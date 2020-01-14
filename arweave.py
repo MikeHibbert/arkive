@@ -34,8 +34,6 @@ class Wallet(object):
             
             self.owner = self.jwk_data.get('n')
             self.address = owner_to_address(self.owner)
-            
-            
 
         self.api_url = "https://arweave.net"
         self.balance = 0
