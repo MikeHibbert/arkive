@@ -23,12 +23,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = '!=qkujsrbtsyk51oy0e3qnf5$37$il9i&m0ux!pz_-$(a4f!7h'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False if int(os.getenv("DEBUG", default=False)) == 0 else True
+DEBUG = False
 
-ALLOWED_HOSTS = os.getenv("DJANGO_ALLOWED_HOSTS")
-
-if ALLOWED_HOSTS is not None and len(ALLOWED_HOSTS) > 0:
-    ALLOWED_HOSTS = ALLOWED_HOSTS.split(" ")
+ALLOWED_HOSTS = ['.arkive.online', 'www.arkive.online']
 
 # Application definition
 

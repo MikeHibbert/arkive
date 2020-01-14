@@ -20,8 +20,23 @@ docker-compose up
 You can then visit http://localhost to run locally or you can setup using nginx using the hosting file contained in the config folder
 
 ###Hosting on a server
-You can deploy this docker instance on a remote server in the same way you deploy any docker instance.
+You can deploy this docker instance on a remote server by intalling docker-ce and docker-compose on the server then copy
+the contents of ```docker-compose.yml``` to your home folder then:
 
-If you want to change the domain name used You will need to edit the Dockerfile and change the DJANGO_ALLOWED_HOSTS to a string containing all the domains you want this app to respond to. If you have multiple domains you can separte each on with a space character and they will be included.
+Remove the build lines:
+```buildoutcfg
+build:
+      context: .
+      dockerfile: ./images/arkive/Dockerfile
 
-You will also need to add the domain to the ```config/nginx/conf.d/arkive_nginx.conf``` file and finally run the ```build_docker.sh``` script again before you run docker-compose again
+... and the later build lines too ...
+
+build:
+      context: .
+      dockerfile: ./images/nginx/Dockerfile
+```
+
+Once they are removed you can simply run ```docker-compose up -d``` and the system will run!
+
+#####Note:
+If you change the domain name from arkive.online to something else you will need to edit the ```server_name``` option in the config/nginx/conf.d/arkive_nginx.conf file and rebuild your docker images

@@ -3,10 +3,11 @@ version: '3'
 services:
   arkive:
     image: mickeysofine1972/arkive
-    build: .
+    build:
+      context: .
+      dockerfile: ./images/arkive/Dockerfile
     command: gunicorn arkive.wsgi:application --bind 0.0.0.0:8000
     volumes:
-      - .:/code
       - static_volume:/code/arkive/staticfiles
       - media_volume:/code/arkive/media
     networks:
@@ -14,11 +15,13 @@ services:
     restart: always
 
   nginx:
-    image: nginx:1.13
+    image: mickeysofine1972/arkive-nginx
+    build:
+      context: .
+      dockerfile: ./images/nginx/Dockerfile
     ports:
       - 80:80
     volumes:
-      - ./config/nginx/conf.d:/etc/nginx/conf.d
       - static_volume:/code/arkive/staticfiles
       - media_volume:/code/arkive/media
     depends_on:
