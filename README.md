@@ -1,6 +1,13 @@
-# arkive ... your pages forever
+# Arkive ... your pages forever
 
 ## Introduction
+Arkive lets you choose two different ways of storing your webpages on the permaweb. You can store the page text on its own
+as a readable version of the page or include images too. Or you can choose to compile the whole page into a bundle that can
+be viewed in its current state including styling and javascript behaviours as well as images.
+
+As Arkive commits transactions to the Arweave permaweb please be aware that each page stored costs the price of the transaction 
+to save it! So feel free to contribute to its upkeep with a small donation in ARWeave Coin to the address on the site. That way the service 
+with be around for years to come!
 
 ## Installation
 To install ARkive you will need to have docker and docker-compose installed (https://docs.docker.com/compose/install/)
