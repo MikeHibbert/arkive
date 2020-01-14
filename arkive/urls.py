@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from arkiver.views import home, get_content, set_options, publish_page
+from arkiver.views import home, get_content, set_options, publish_page, get_task_progress
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -23,5 +23,5 @@ urlpatterns = [
     path('get-content', get_content, name='get_content'),
     path('set-options', set_options, name='set_options'),
     path('publish-page', publish_page, name='publish_page'),
-
+path('get_task_progress/<str:task_id>/', get_task_progress, name='get_task_progress'),
 ]

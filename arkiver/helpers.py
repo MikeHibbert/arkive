@@ -1,4 +1,6 @@
 import os
+from os import listdir
+from os.path import isfile, join
 import arrow
 import htmlark
 import bs4
@@ -12,7 +14,17 @@ logger = logging.getLogger(__name__)
 
 
 def upload_file_to_arweave(filepath, url, tags):
-    wallet_path = os.path.join(settings.BASE_DIR, 'wallet', 'wallet.pem')
+    wallet_path = os.path.join(settings.BASE_DIR, 'wallet')
+
+    files = [f for f in listdir(wallet_path) if isfile(join(wallet_path, f))]
+
+    if len(files) > 0:
+        filename = files[0]
+    else:
+        raise FileNotFoundError("Unable to load a wallet JSON file from wallet/ ")
+
+    wallet_path = join(wallet_path, filename)
+
     wallet = Wallet(wallet_path)
 
     tx_id = None
@@ -27,8 +39,8 @@ def upload_file_to_arweave(filepath, url, tags):
             tx.add_tag('created', str(arrow.now().timestamp))
             tx.add_tag('url', url)
 
-            for name, value in tags.iteritems():
-                tx.add_tag(name, value)
+            for tag in tags:
+                tx.add_tag("keyword", tag['keyword'])
 
             tx.sign(wallet)
 
@@ -83,7 +95,7 @@ def create_readable_page(url, include_images):
     parser = htmlark.get_available_parsers()[0]
     soup = bs4.BeautifulSoup(html, parser=parser)
 
-    # TODO: add in all title, description, images and og tags and all copy
+    # TODO: add in all title, description, images and og_tags and all copy
 
     save_file = os.path.join(settings.BASE_DIR, 'pages', "{}.html".format(arrow.now().timestamp))
 

@@ -1,7 +1,9 @@
 import json
+from django.http import HttpResponse
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from .forms import URLForm, PublishOptionsForm
+from celery.result import AsyncResult
 from .helpers import get_newspaper
 from arkive.tasks import create_archive_page_task, create_readable_page_task
 
@@ -54,3 +56,12 @@ def publish_page(request):
                 save_file = create_archive_page_task(url, tags)
 
     return render(request, 'published-page.html', locals())
+
+
+def get_task_progress(request, task_id):
+    result = AsyncResult(task_id)
+    response_data = {
+        'state': result.state,
+        'details': result.info,
+    }
+    return HttpResponse(json.dumps(response_data), content_type='application/json')
