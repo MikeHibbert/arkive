@@ -1,3 +1,4 @@
+import json
 from django.shortcuts import render, redirect, reverse
 from django.contrib import messages
 from .forms import URLForm, PublishOptionsForm
@@ -23,7 +24,7 @@ def get_content(request):
 
 def set_options(request):
     if request.method == "POST":
-        form = URLForm(request.POST)
+        form = PublishOptionsForm(request.POST)
 
         if form.is_valid():
             newspaper = get_newspaper(form.cleaned_data.get('url'))
@@ -39,10 +40,17 @@ def publish_page(request):
         if form.is_valid():
             publish_as = form.cleaned_data['publish_as']
             url = form.cleaned_data['url']
+            tags = form.cleaned_data['tags']
+
+            if len(tags) > 0:
+                tags = json.loads(tags)
+                tags = [{'keyword': keyword['value']} for keyword in tags]
+
+            include_images = form.cleaned_data['include_images']
 
             if publish_as == 'readable':
-                save_file = create_readable_page_task(url)
+                save_file = create_readable_page_task(url, tags, include_images)
             if publish_as == 'archive':
-                save_file = create_archive_page_task(url)
+                save_file = create_archive_page_task(url, tags)
 
     return render(request, 'published-page.html', locals())

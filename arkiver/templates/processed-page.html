@@ -28,7 +28,9 @@
                             <hr/>
                             <section id="options-section" class="doc-section">
 
-                                <form method="post" action="{% url 'set_options' %}">
+                                <form method="post" action="{% url 'publish_page' %}">
+                                    {% csrf_token %}
+                                    {{form.url.as_hidden}}
                                     <label><strong>How would you like to store this page's content?</strong></label>
                                     <select id="publish_as" name="publish_as" class="form-control">
                                         <option value="readable">Create readable version</option>

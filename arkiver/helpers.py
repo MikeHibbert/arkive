@@ -11,7 +11,7 @@ from django.conf import settings
 logger = logging.getLogger(__name__)
 
 
-def upload_file_to_arweave(filepath, url, tags=[]):
+def upload_file_to_arweave(filepath, url, tags):
     wallet_path = os.path.join(settings.BASE_DIR, 'wallet', 'wallet.pem')
     wallet = Wallet(wallet_path)
 
@@ -71,7 +71,7 @@ def create_archive_page(url):
     return save_file
 
 
-def create_readable_page(url):
+def create_readable_page(url, include_images):
     newspaper = get_newspaper(url)
 
     html_template = os.path.join(settings.BASE_DIR, 'arkiver', "templates", 'readable-template.html')

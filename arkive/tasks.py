@@ -8,13 +8,13 @@ from arkiver.helpers import get_newspaper, create_archive_page, create_readable_
 def create_archive_page_task(url, tags):
     save_file = create_archive_page(url)
 
-    upload_file_to_arweave(save_file)
+    upload_file_to_arweave(save_file, url, tags)
 
 
 @task
-def create_readable_page_task(url, tags):
-    save_file = create_readable_page(url)
+def create_readable_page_task(url, tags, include_images):
+    save_file = create_readable_page(url, include_images)
 
-    upload_file_to_arweave(save_file)
+    upload_file_to_arweave(save_file, url, tags)
 
 
