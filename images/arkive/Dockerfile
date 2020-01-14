@@ -7,7 +7,6 @@ COPY requirements.txt /code/requirements.txt
 RUN pip install -r /code/requirements.txt
 COPY config /code/config
 COPY . /code
-RUN rm /code/arkive/local_settings.py 2> /dev/null
 RUN python -c "import nltk; nltk.download('punkt')"
 WORKDIR /code
 RUN python manage.py collectstatic --noinput
