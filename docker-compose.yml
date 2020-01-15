@@ -12,6 +12,7 @@ services:
       - media_volume:/code/arkive/media
     networks:
       - nginx_network
+      - redis
     restart: always
 
   nginx:
@@ -37,7 +38,19 @@ services:
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
 
+  celery:
+    image: mickeysofine1972/arkive-celery
+    build:
+      context: .
+      dockerfile: ./images/celery/Dockerfile
+    command: celery -A arkive worker --app=arkive.celery:app --loglevel=debug
+    depends_on:
+      - redis
+    networks:
+      - redis
+
 networks:
+  redis:
   nginx_network:
     driver: bridge
 

@@ -68,6 +68,7 @@ PyYAML==5.3
 pyzmq==18.1.1
 qtconsole==4.6.0
 readability-lxml==0.7.1
+redis==3.3.11
 requests==2.22.0
 requests-file==1.4.3
 rsa==4.0

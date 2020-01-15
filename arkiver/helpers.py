@@ -7,7 +7,7 @@ import bs4
 import logging
 from arweave import Transaction, Wallet
 from newspaper import Article, ArticleException
-from opengraph_tags import add_og_tags_to_page_at
+from opengraph_tags import add_og_tags_to_page_at, add_og_tage_to_page
 from django.conf import settings
 
 logger = logging.getLogger(__name__)
@@ -27,7 +27,7 @@ def upload_file_to_arweave(filepath, url, tags):
 
     wallet = Wallet(wallet_path)
 
-    tx_id = None
+    tx = {id: None}
 
     try:
         with open(filepath, 'r') as file_to_upload:
@@ -51,7 +51,7 @@ def upload_file_to_arweave(filepath, url, tags):
     except Exception as e:
         logger.debug(e)
 
-    return tx_id
+    return tx
 
 
 
@@ -92,18 +92,15 @@ def create_readable_page(url, include_images):
     with open(html_template, 'r') as htmlt:
         html = htmlt.read()
 
-    parser = htmlark.get_available_parsers()[0]
-    soup = bs4.BeautifulSoup(html, parser=parser)
+        html = html.replace('{{newspaper.title}}', newspaper.title)
+        html = html.replace('{{newspaper.top_image}}', newspaper.top_image)
+        html = html.replace('{{newspaper.text}}', newspaper.text)
+        html = html.replace('{{newspaper.authors}}', newspaper.authors)
+        html = html.replace('{{newspaper.keywords}}', newspaper.keywords)
+        html = html.replace('{{newspaper.summary}}', newspaper.summary)
 
-    # TODO: add in all title, description, images and og_tags and all copy
+        save_file = os.path.join(settings.BASE_DIR, 'pages', "{}.html".format(arrow.now().timestamp))
 
-    save_file = os.path.join(settings.BASE_DIR, 'pages', "{}.html".format(arrow.now().timestamp))
-
-    add_og_tags_to_page_at(url, save_file)
-
-    html = str(soup)
-
-    with open(save_file, 'w') as sf:
-        sf.write(html)
+        add_og_tage_to_page(html, save_file)
 
     return save_file

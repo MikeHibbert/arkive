@@ -87,7 +87,10 @@
 {% endblock %}
 
 {% block js_extra %}
+    <script src="https://unpkg.com/arweave/bundles/web.bundle.js"></script>
     <script type="text/javascript">
+        const arweave = Arweave.init();
+
         $(document).ready(function() {
             $('[name=tags]')
             .tagify()
@@ -109,5 +112,28 @@
                 }
             });
         });
+
+        var progressUrl = '{% url "get_task_progress" task_id %}';
+
+        var interval = setInterval(function() {
+            $.get(progressUrl)
+            .then(function(response) {
+               console.log(response);
+               if(response.state == "SUCCESS") {
+                    clearInterval(interval);
+                    var tx_id = response.details.replace("tx_id: b'", "").replace("'", "");
+
+                    var url = "https://arweave.net/" + tx_id;
+
+                    interval = setInterval(function() {
+                        arweave.transactions.getStatus().then(status => {
+                            $('
+
+                        })
+                    }, 2000);
+
+               }
+            });
+        }, 2000);
     </script>
 {% endblock %}

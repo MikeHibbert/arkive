@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  redis:
+    image: redis:latest
+    hostname: redis
+    restart: always
+    networks:
+      - redis
+    environment:
+      - ALLOW_EMPTY_PASSWORD=yes
+
+  celery:
+    build:
+      context: .
+      dockerfile: ./images/celery/Dockerfile
+    command: celery -A arkive worker --beat --app=arkive.celery:app --loglevel=debug
+    depends_on:
+      - redis
+    networks:
+      - redis
+
+
+networks:
+  redis:

@@ -1,0 +1,106 @@
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>ARkive Your pages forever</title>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+
+    <script defer src="https://use.fontawesome.com/releases/v5.8.2/js/all.js" integrity="sha384-DJ25uNYET2XCl5ZF++U8eNxPWqcKohUUBUpKGlNLMchM7q4Wjg2CUpjHLaL8yYPH" crossorigin="anonymous"></script>
+
+    <link rel="stylesheet" href="/static/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/plugins/prism/prism.css">
+    <link rel="stylesheet" href="/static/plugins/elegant_font/css/style.css">
+    <link rel="stylesheet" href="/static/node_modules/toastr/build/toastr.css">
+    <link rel="stylesheet" href="/static/node_modules/%40yaireo/tagify/dist/tagify.css">
+
+    <link id="theme-style" rel="stylesheet" href="/static/css/styles.css">
+
+</head>
+
+<body>
+    <div class="page-wrapper">
+
+        <header id="header" class="header">
+            <div class="container">
+                <div class="branding pull-left">
+                    <h1 class="logo">
+                        <a href="index.html">
+                            <span aria-hidden="true" class="icon_documents_alt icon"></span>
+                            <span class="text-highlight">AR</span><span class="text-bold">kive</span>
+                        </a>
+                    </h1>
+                    <p>Your pages forever</p>
+                </div>
+                <div class="pull-right" style="width: 430px">
+                    <h3>Donate</h3>
+                    <p>
+                        To keep ARKive doing what it does best you can send a donation of AR to this address:<br><br>
+                        <input
+                                        value="OFD5dO06Wdurb4w5TTenzkw1PacATOP-6lAlfAuRZFk"
+                                        id="ar-address"
+                                        style="background: #494d55; color: rgba(255, 255, 255, 0.85); border: none; font-weight: bold"
+                    > <span id='copy-address-icon' style='cursor: pointer' aria-hidden="true" class="icon_documents_alt icon" title="Click to copy address"></span>
+                    </p>
+                    <p></p>
+                </div>
+                <div class="clearfix"></div>
+            </div>
+        </header>
+        <div class="doc-wrapper">
+            <div class="container">
+
+        <div id="doc-header" class="doc-header text-center">
+                    <h1 class="doc-title"><i class="icon fa fa-paper-plane"></i> Getting Started</h1>
+                </div>
+                <div class="doc-body row">
+                    <div class="doc-content col-md-9 col-12 order-1">
+                        <div class="content-inner">
+                            <div id="readable">
+                            <h2>{{newspaper.title}}</h2>
+                            <br>
+                            <p>
+                                <img src="{{newspaper.top_image}}" width="100%"/>
+                                <label>Top Image</label>
+                            </p>
+                            <h3>Article</h3>
+
+                            <p>
+                                {{newspaper.text}}
+                            </p>
+                            {% if newpaper.authors.length > 0 %}
+                                <h3>Authors</h3>
+                                <p>{{newspaper.authors}}</p>
+                            {% endif %}
+
+                            <label for="tags">Keywords</label>
+                            {{newspaper.keywords}}
+                            <br>
+                            <h3>Summary</h3>
+                            <p>{{newspaper.summary}}</p>
+                        </div>
+
+
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+    <footer id="footer" class="footer text-center">
+        <div class="container">
+        </div>
+    </footer>
+</body>
+</html>

@@ -20,6 +20,7 @@ def get_content(request):
             newspaper = get_newspaper(form.cleaned_data.get('url'))
         else:
             messages.error(request, "URL not valid")
+            return redirect(reverse('index'))
 
     return render(request, 'processed-page.html', locals())
 
@@ -31,7 +32,8 @@ def set_options(request):
         if form.is_valid():
             newspaper = get_newspaper(form.cleaned_data.get('url'))
         else:
-            messages.error(request, "URL not valid")
+            messages.error(request, "There was an error processing your page. Please try again.")
+            return redirect(reverse('index'))
 
     return render(request, 'processed-page.html', locals())
 
@@ -51,9 +53,11 @@ def publish_page(request):
             include_images = form.cleaned_data['include_images']
 
             if publish_as == 'readable':
-                save_file = create_readable_page_task(url, tags, include_images)
+                res = create_readable_page_task.delay(url, tags, include_images)
             if publish_as == 'archive':
-                save_file = create_archive_page_task(url, tags)
+                res = create_archive_page_task.delay(url, tags)
+
+            task_id = res.id
 
     return render(request, 'published-page.html', locals())
 

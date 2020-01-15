@@ -139,7 +139,9 @@ MESSAGE_TAGS = {message_constants.DEBUG: 'debug',
 
 BROKER_URL = 'redis://redis/0'
 CELERY_RESULT_BACKEND = 'redis://redis/0'
-CELERY_ALWAYS_EAGER = True
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
 
 try:
     from .local_settings import *
