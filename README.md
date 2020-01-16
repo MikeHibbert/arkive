@@ -35,7 +35,6 @@ You can then visit http://localhost to run locally or you can setup using nginx 
 You can deploy this docker instance on a remote server by intalling docker-ce and docker-compose on the server then copy
 the code below into a file ```docker-compose.yml``` to your servers home folder:
 
-Remove the build lines:
 ```buildoutcfg
 version: '3'
 
