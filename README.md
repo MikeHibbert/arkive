@@ -10,6 +10,8 @@ As Arkive commits transactions to the Arweave permaweb please be aware that each
 to save it! So feel free to contribute to its upkeep with a small donation in ARWeave Coin to the address on the site. That way the service 
 with be around for years to come!
 
+Wallet Address Currently Used: ```h-Bgr13OWUOkRGWrnMT0LuUKfJhRss5pfTdxHmNcXyw```
+
 ## Installation
 To install ARkive you will need to have docker and docker-compose installed (https://docs.docker.com/compose/install/)
 
