@@ -29,27 +29,24 @@ def upload_file_to_arweave(filepath, url, tags):
 
     tx = {id: None}
 
-    try:
-        with open(filepath, 'r') as file_to_upload:
-            data = file_to_upload.read()
+    logger.error("Loading {}",format(filepath))
 
-            tx = Transaction(wallet, data=data.encode())
+    with open(filepath, 'r') as file_to_upload:
+        logger.error("Loaded {}", format(filepath))
+        data = file_to_upload.read()
 
-            tx.add_tag("app", "Arkive")
-            tx.add_tag('created', str(arrow.now().timestamp))
-            tx.add_tag('url', url)
+        tx = Transaction(wallet, data=data.encode())
 
-            for tag in tags:
-                tx.add_tag("keyword", tag['keyword'])
+        tx.add_tag("app", "Arkive")
+        tx.add_tag('created', str(arrow.now().timestamp))
+        tx.add_tag('url', url)
 
-            tx.sign(wallet)
+        for tag in tags:
+            tx.add_tag("keyword", tag['keyword'])
 
-            tx.post()
+        tx.sign(wallet)
 
-            tx_id = tx.id.decode()
-
-    except Exception as e:
-        logger.debug(e)
+        tx.post()
 
     return tx
 

@@ -67,7 +67,7 @@
                                     <button class="btn btn-cta btn-success">Publish this Page</button>
                                 </form>
                             </section>
-                            <section id="publish-details"></section>
+                            <section id="publish-details">Your content is being published please waite ...</section>
 
 
                         </div>
@@ -124,10 +124,11 @@
                     var tx_id = response.details.replace("tx_id: b'", "").replace("'", "");
 
                     var url = "https://arweave.net/" + tx_id;
+                    var status_url = "https://arweave.net/tx/" + tx_id + "/status";
 
                     $('body').scrollTo($('#publish-details'), 800);
 
-                    $('#publish-details').html("<a href='" + url + "'>Your content can be found here!</a>");
+                    $('#publish-details').html("<a target="_blanks" href='" + url + "'>Your content can be found here!</a><br><a target="_blanks" href='" + status_url + "'>You can check your transaction status here!</a>");
 
                }
             });
