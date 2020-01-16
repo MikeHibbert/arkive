@@ -95,8 +95,8 @@ def create_readable_page(url, include_images):
         html = html.replace('{{newspaper.title}}', newspaper.title)
         html = html.replace('{{newspaper.top_image}}', newspaper.top_image)
         html = html.replace('{{newspaper.text}}', newspaper.text)
-        html = html.replace('{{newspaper.authors}}', newspaper.authors)
-        html = html.replace('{{newspaper.keywords}}', newspaper.keywords)
+        html = html.replace('{{newspaper.authors}}', ",".join(newspaper.authors))
+        html = html.replace('{{newspaper.keywords}}', ",".join(newspaper.keywords))
         html = html.replace('{{newspaper.summary}}', newspaper.summary)
 
         save_file = os.path.join(settings.BASE_DIR, 'pages', "{}.html".format(arrow.now().timestamp))

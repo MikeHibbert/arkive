@@ -20,12 +20,12 @@ def create_archive_page_task(self, url, tags):
 
     logger.debug(transaction.id)
 
-    self.update_state(state='PROGRESS', meta={'current': 2, 'total': 3, 'tx_id': transaction.id.decode("utf-8")})
+    self.update_state(state='PROGRESS', meta={'current': 2, 'total': 3, 'tx_id': transaction.id})
 
     while transaction.status != "PENDING":
         transaction.get_status()
 
-    self.update_state(state='PROGRESS', meta={'current': 3, 'total': 3, 'tx_id': transaction.id.decode("utf-8")})
+    self.update_state(state='PROGRESS', meta={'current': 3, 'total': 3, 'tx_id': transaction.id})
 
     return "tx_id: {}".format(transaction.id)
 
@@ -36,12 +36,12 @@ def create_readable_page_task(self, url, tags, include_images):
     self.update_state(state='PROGRESS', meta={'current': 1, 'total': 3, 'tx_id': 'none'})
 
     transaction = upload_file_to_arweave(save_file, url, tags)
-    self.update_state(state='PROGRESS', meta={'current': 2, 'total': 3, 'tx_id': transaction.id.decode("utf-8")})
+    self.update_state(state='PROGRESS', meta={'current': 2, 'total': 3, 'tx_id': transaction.id})
 
     while transaction.status != "PENDING":
         transaction.get_status()
 
-    self.update_state(state='PROGRESS', meta={'current': 3, 'total': 3, 'tx_id': transaction.id.decode("utf-8")})
+    self.update_state(state='PROGRESS', meta={'current': 3, 'total': 3, 'tx_id': transaction.id})
 
     return "tx_id: {}".format(transaction.id)
 

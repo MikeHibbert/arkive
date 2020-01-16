@@ -35,6 +35,8 @@ services:
     image: redis:latest
     hostname: redis
     restart: always
+    networks:
+      - redis
     environment:
       - ALLOW_EMPTY_PASSWORD=yes
 

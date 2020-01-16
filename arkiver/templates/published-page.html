@@ -67,6 +67,7 @@
                                     <button class="btn btn-cta btn-success">Publish this Page</button>
                                 </form>
                             </section>
+                            <section id="publish-details"></section>
 
 
                         </div>
@@ -125,9 +126,11 @@
 
                     var url = "https://arweave.net/" + tx_id;
 
+                    $('body').scrollTo($('#publish-details'), 800);
+
                     interval = setInterval(function() {
                         arweave.transactions.getStatus().then(status => {
-                            $('
+                            $('#publish-details').html("<a href='" + url + "'>Your content can be found here!</a>");
 
                         })
                     }, 2000);

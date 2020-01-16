@@ -123,7 +123,7 @@ class Transaction(object):
         
         self.signature = base64url_encode(raw_signature)
         
-        self.id = base64url_encode(hashlib.sha256(raw_signature).digest())
+        self.id = base64url_encode(hashlib.sha256(raw_signature).digest()).decode()
         
     def get_signature_data(self):
         tag_str = ""
