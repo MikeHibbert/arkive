@@ -68,7 +68,10 @@
                                         <p>Your page's content, images, css and javascript will be compiled and uploaded to the Arweave where it will be permanently viewable.</p>
                                     </div>
                                     <br/>
-                                    <button class="btn btn-cta btn-success">Publish this Page</button>
+
+                                    <input type="checkbox" id="confirm" >
+                                    <label>Yes, I'm responsible for the archived content and the content is not copyright protected</label><br><br>
+                                    <button class="btn btn-cta btn-success" id="publish" disabled="disabled">Publish this Page</button>
                                 </form>
                             </section>
 
@@ -80,8 +83,7 @@
 
 	                            <nav id="doc-menu" class="nav doc-menu flex-column sticky">
 	                                <a class="nav-link scrollto" href="/">Enter URL</a>
-	                                <a class="nav-link scrollto active" href="#options-section">Select Options</a>
-                                    <a class="nav-link scrollto" href="#publish-section">Publish Your Page</a>
+                                    <a class="nav-link scrollto active" href="#publish-section">Publish Your Page</a>
                                     <a class="nav-link scrollto" href="#publish-details-section">Permaweb Details</a>
 	                            </nav>
 
@@ -100,6 +102,14 @@
             });
 
             $('body').scrollTo($('#options-section'), 800);
+
+            $('#confirm').click(function() {
+                if(this.checked) {
+                    $('#publish').attr('disabled', false);
+                } else {
+                    $('#publish').attr('disabled', false);
+                }
+            });
 
             $('#publish_as').change(function(event) {
                 var option = event.target.value;

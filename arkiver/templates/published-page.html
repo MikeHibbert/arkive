@@ -77,9 +77,8 @@
 
 	                            <nav id="doc-menu" class="nav doc-menu flex-column sticky">
 	                                <a class="nav-link scrollto" href="/">Enter URL</a>
-	                                <a class="nav-link scrollto active" href="#options-section">Select Options</a>
                                     <a class="nav-link scrollto" href="#publish-section">Publish Your Page</a>
-                                    <a class="nav-link scrollto" href="#publish-details-section">Permaweb Details</a>
+                                    <a class="nav-link scrollto active" href="#publish-details-section">Permaweb Details</a>
 	                            </nav>
 
                         </div>
@@ -121,14 +120,14 @@
                console.log(response);
                if(response.state == "SUCCESS") {
                     clearInterval(interval);
-                    var tx_id = response.details.replace("tx_id: b'", "").replace("'", "");
+                    var tx_id = response.details;
 
                     var url = "https://arweave.net/" + tx_id;
                     var status_url = "https://arweave.net/tx/" + tx_id + "/status";
 
                     $('body').scrollTo($('#publish-details'), 800);
 
-                    $('#publish-details').html("<a target="_blanks" href='" + url + "'>Your content can be found here!</a><br><a target="_blanks" href='" + status_url + "'>You can check your transaction status here!</a>");
+                    $('#publish-details').html("<a target='_blanks' href='" + url + "'>Your content can be found here!</a><br><a target='_blank' href='" + status_url + "'>You can check your transaction status here!</a>");
 
                }
             });
