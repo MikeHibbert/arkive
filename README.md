@@ -12,6 +12,8 @@ with be around for years to come!
 
 Wallet Address Currently Used: ```h-Bgr13OWUOkRGWrnMT0LuUKfJhRss5pfTdxHmNcXyw```
 
+Live service: ```http://www.arkive.online```
+
 ## Installation
 To install ARkive you will need to have docker and docker-compose installed (https://docs.docker.com/compose/install/)
 
