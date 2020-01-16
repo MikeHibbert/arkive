@@ -88,9 +88,8 @@
 {% endblock %}
 
 {% block js_extra %}
-    <script src="https://unpkg.com/arweave/bundles/web.bundle.js"></script>
     <script type="text/javascript">
-        const arweave = Arweave.init();
+
 
         $(document).ready(function() {
             $('[name=tags]')
@@ -128,12 +127,7 @@
 
                     $('body').scrollTo($('#publish-details'), 800);
 
-                    interval = setInterval(function() {
-                        arweave.transactions.getStatus().then(status => {
-                            $('#publish-details').html("<a href='" + url + "'>Your content can be found here!</a>");
-
-                        })
-                    }, 2000);
+                    $('#publish-details').html("<a href='" + url + "'>Your content can be found here!</a>");
 
                }
             });

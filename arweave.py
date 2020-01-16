@@ -1,4 +1,5 @@
 import json
+import os
 import requests
 import logging
 import hashlib
@@ -123,7 +124,10 @@ class Transaction(object):
         
         self.signature = base64url_encode(raw_signature)
         
-        self.id = base64url_encode(hashlib.sha256(raw_signature).digest()).decode()
+        self.id = base64url_encode(hashlib.sha256(raw_signature).digest())
+
+        if type(self.id) == bytes:
+            self.id = self.id.decode()
         
     def get_signature_data(self):
         tag_str = ""
@@ -148,8 +152,10 @@ class Transaction(object):
 
         response = requests.post(url, data=self.json_data)
 
+        logger.error("{}\n\n{}".format(response.text, self.json_data))
+
         if response.status_code == 200:
-            logger.debug(response.text)
+            logger.debug("RESPONSE 200: {}".format(response.text))
         else:
             logger.error("{}\n\n{}".format(response.text, self.json_data))
             
@@ -159,7 +165,7 @@ class Transaction(object):
     def json_data(self):
         jsons = json.dumps({
                  'data': self.data.decode(),
-                 'id': self.id.decode(),
+                 'id': self.id.decode() if type(self.id) == bytes else self.id,
                  'last_tx': self.last_tx,
                  'owner': self.owner,
                  'quantity': self.quantity,
@@ -217,11 +223,16 @@ class Transaction(object):
 
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
+
+    from os.path import isfile, join
+    from os import listdir
+
+    BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
     
     def run_test(jwk_file):
         wallet = Wallet(jwk_file)
         
-        pdf_filename = "/home/mike/Downloads/test2.pdf"
+        pdf_filename = "/home/mike/Downloads/me.jpg"
         with open(pdf_filename, 'rb') as pdf_file:
             pdf_data = pdf_file.read()
 
@@ -239,7 +250,7 @@ if __name__ == "__main__":
             
             tx.sign(wallet)
             
-            #tx.post()
+            tx.post()
             
             logger.debug(tx.get_status())
             
@@ -248,5 +259,15 @@ if __name__ == "__main__":
             new_tx.get_status()
             logger.debug(new_tx.status)
 
-    run_test("somekeyfile.json")
+
+    wallet_path = '/home/mike/Documents/python/arkive/arkive/wallet' # os.path.join(BASE_DIR, 'arkive', 'wallet')
+
+    files = [f for f in listdir(wallet_path) if isfile(join(wallet_path, f))]
+
+    if len(files) > 0:
+        filename = files[0]
+    else:
+        raise FileNotFoundError("Unable to load a wallet JSON file from wallet/ ")
+
+    run_test(join(wallet_path, filename))
 

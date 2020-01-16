@@ -137,8 +137,8 @@ MESSAGE_TAGS = {message_constants.DEBUG: 'debug',
                 message_constants.WARNING: 'warning',
                 message_constants.ERROR: 'error',}
 
-BROKER_URL = 'redis://arkive_redis_1/0'
-CELERY_RESULT_BACKEND = 'redis://arkive_redis_1/0'
+BROKER_URL = 'redis://redis/0'
+CELERY_RESULT_BACKEND = 'redis://redis/0'
 CELERY_ACCEPT_CONTENT = ['application/json']
 CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
