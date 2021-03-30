@@ -14,7 +14,7 @@ cryptography==2.8
 cssselect==1.1.0
 decorator==4.4.1
 defusedxml==0.6.0
-Django==3.0.2
+Django==3.0.12
 ecdsa==0.15
 entrypoints==0.3
 feedfinder2==0.0.4
